@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--import bootstrap-->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <title>Latest CS News</title>
+
+</head>
+<body>
+    <div class="container">
+        <h2>Latest Computer science and technology NEWS</h2><br/>
+            <ul class="nav nav-pills nav-stacked">
+                {% for i in QuerySet %}
+                <!-- trigle the model box -->
+                    <li role="presentation" data-toggle="modal" data-target="#myModal{{ i.id }}"><a href="#">{{ i.name }}</a></li>
+                <!--（Modal） -->
+                <div class="modal fade" id="myModal{{ i.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                    &times;
+                                </button>
+                                <h4 class="modal-title" id="myModalLabel">
+                                    {{ i.name }}
+                                </h4>
+                            </div>
+                            <div class="modal-body">
+                                {{ i.text }}
+                            </div>
+                            <div class="modal-footer">
+                                <p>Read More: <a href="{{ i.url }}">{{ i.url }}</a></p>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">CLOSE
+                                </button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal -->
+                </div>
+                {% endfor %}
+            </ul>
+    </div>
+</body>
+</html>
